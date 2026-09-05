@@ -31,35 +31,30 @@ public class ProductRepository : IProductRepository
             .AsNoTracking()
             .AsQueryable();
 
-        // Filtering by name
         if (!string.IsNullOrWhiteSpace(filter?.Name))
         {
             query = query.Where(p =>
                 p.Name.ToLower().Contains(filter.Name.ToLower()));
         }
 
-        // Filtering by minimum price
         if (filter?.MinPrice is not null)
         {
             query = query.Where(p =>
                 p.Price >= filter.MinPrice.Value);
         }
 
-        // Filtering by maximum price
         if (filter?.MaxPrice is not null)
         {
             query = query.Where(p =>
                 p.Price <= filter.MaxPrice.Value);
         }
 
-        // Filtering by active status
         if (filter?.IsActive is not null)
         {
             query = query.Where(p =>
                 p.IsActive == filter.IsActive.Value);
         }
 
-        // Sorting
         if (string.Equals(
                 filter?.SortBy,
                 "name",
@@ -96,7 +91,6 @@ public class ProductRepository : IProductRepository
         }
         else
         {
-            // Default sorting
             query = query.OrderBy(p => p.CreatedAt);
         }
 

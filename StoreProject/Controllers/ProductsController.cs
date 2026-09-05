@@ -24,7 +24,6 @@ public class ProductsController : ControllerBase
         _updateValidator = updateValidator;
     }
 
-    // GET: api/products
     [HttpGet]
     [EnableQuery]
     public async Task<IActionResult> GetAll(
@@ -74,7 +73,6 @@ public class ProductsController : ControllerBase
             });
         }
 
-        // Validate sorting field
         if (!string.IsNullOrWhiteSpace(filter?.SortBy) &&
             !string.Equals(filter.SortBy, "name", StringComparison.OrdinalIgnoreCase) &&
             !string.Equals(filter.SortBy, "price", StringComparison.OrdinalIgnoreCase))
@@ -85,7 +83,6 @@ public class ProductsController : ControllerBase
             });
         }
 
-        // Validate sorting order
         if (!string.IsNullOrWhiteSpace(filter?.SortOrder) &&
             !string.Equals(filter.SortOrder, "asc", StringComparison.OrdinalIgnoreCase) &&
             !string.Equals(filter.SortOrder, "desc", StringComparison.OrdinalIgnoreCase))
@@ -112,7 +109,6 @@ public class ProductsController : ControllerBase
         return Ok(products);
     }
 
-    // GET: api/products/{id}
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -129,7 +125,6 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
-    // POST: api/products
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductDto dto)
     {
@@ -156,7 +151,6 @@ public class ProductsController : ControllerBase
             product);
     }
 
-    // PUT: api/products/{id}
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(
         Guid id,
@@ -191,7 +185,6 @@ public class ProductsController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/products/{id}
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
